@@ -18,6 +18,7 @@
 		<knife4j.version>3.0.2</knife4j.version>
 		<fastjson.version>1.2.72</fastjson.version>
 		<mybatis.version>2.2.2</mybatis.version>
+		<jetcache.latest.version>2.7.4</jetcache.latest.version>
 	</properties>
 
 	<dependencies>
@@ -28,6 +29,20 @@
 			<artifactId>l2cache-spring-boot-starter</artifactId>
 			<version>1.0.37</version>
 		</dependency>-->
+
+		<!-- jetcache 二级缓存 -->
+		<!-- https://mvnrepository.com/artifact/com.alicp.jetcache/jetcache-redis -->
+		<dependency>
+			<groupId>com.alicp.jetcache</groupId>
+			<artifactId>jetcache-starter-redis</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+		<!-- jetcache2.7.x版本需要额外添加该依赖 -->
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>4.3.1</version>
+		</dependency>
 
 		<!-- redis -->
 		<dependency>

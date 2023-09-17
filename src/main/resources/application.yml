@@ -68,6 +68,28 @@ l2cache:
       # 缓存更新时通知其他节点的topic名称 默认 cache:redis:caffeine:topic
       topic: cache:redis:caffeine:topic
 
+jetcache:
+  statIntervalMinutes: 1
+  areaInCacheName: false
+  local:
+    default:
+      type: linkedhashmap #other choose：caffeine
+      keyConvertor: fastjson2 #other choose：fastjson/jackson
+      limit: 100
+  remote:
+    default:
+      type: redis
+      keyConvertor: fastjson2 #other choose：fastjson/jackson
+      broadcastChannel: redis:caffeine:topic
+      valueEncoder: java #other choose：kryo/kryo5
+      valueDecoder: java #other choose：kryo/kryo5
+      poolConfig:
+        minIdle: 5
+        maxIdle: 20
+        maxTotal: 50
+      host: localhost
+      port: 6379
+
 logging:
   level:
-    root: debug
+    root: info

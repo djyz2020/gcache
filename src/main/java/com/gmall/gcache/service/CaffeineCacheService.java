@@ -1,6 +1,6 @@
 package com.gmall.gcache.service;
 
-import com.gmall.gcache.common.cache.spring.RedisCaffeineCacheManager;
+import com.alicp.jetcache.anno.*;
 import com.gmall.gcache.entity.UserVO;
 import com.gmall.gcache.mapper.UserMapper;
 import org.slf4j.Logger;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  *  测试
@@ -28,7 +29,8 @@ public class CaffeineCacheService {
     /**
      * 获取或加载缓存项
      */
-    @Cacheable(value = "userCache", key = "'cache_user_id_' + #userId")
+//    @Cacheable(value = "userCache", key = "'cache_user_id_' + #userId")
+    @Cached(name="userCache:", key = "#userId", syncLocal = true, cacheType = CacheType.BOTH, expire = 300, localExpire = 10)
     public UserVO queryUser(String userId) {
         UserVO userVO = userMapper.findUserById(userId);
         sleep3();
@@ -66,7 +68,8 @@ public class CaffeineCacheService {
     /**
      * 更新缓存
      */
-    @CachePut(value = "userCache", key = "#userId")
+//    @CachePut(value = "userCache", key = "#userId")
+    @CacheInvalidate(name = "userCache", key = "#userId")
     public UserVO updateUser(String userId, UserVO userVO) {
         return userVO;
     }
